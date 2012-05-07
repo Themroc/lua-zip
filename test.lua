@@ -1,7 +1,7 @@
 #!/usr/bin/env lua
 
 -- Global symbols:
-local _0 = string.sub(debug.getinfo(1,'S').source, 2)
+local _0 = arg[0]
 local tap
 local zip
 local ok
@@ -12,7 +12,7 @@ local tmp_dir
 function load_libs(build_dir)
     -- Set-up cpath and path properly:
     build_dir = build_dir:gsub("(.*)/*", "%1")
-    local f=io.open(build_dir .. "/brimworks/zip.so", "r")
+    local f=io.open(build_dir .. "/brimworks_zip.so", "r")
     if ( f ) then
         f:close()
         package.cpath = build_dir .. "/?.so;" .. package.cpath
@@ -22,7 +22,7 @@ function load_libs(build_dir)
 
     -- Load libraries:
     tap = require("tap")
-    zip = require("brimworks.zip")
+    zip = require("brimworks_zip")
     ok  = tap.ok
     is_deeply = tap.is_deeply
 
